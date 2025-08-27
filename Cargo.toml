@@ -8,6 +8,13 @@ keywords = ["rust", "gtk", "nix", "flake", "template"]
 repository = "github.com/domirando/gtkchi"
 homepage = "github.com/domirando/gtkchi"
 readme = "README.md"
+exclude = [
+    "public/assets/*",
+    "videos/*",
+]
+include = [
+    "**/*.rs",
+]
 
 [dependencies]
 gtk = { version = "0.10.0", package = "gtk4", features = ["v4_12"] }
