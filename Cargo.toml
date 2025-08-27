@@ -6,7 +6,7 @@ license = "MIT"
 description = "A basic template for GTK-RS, NIX"
 keywords = ["rust", "gtk", "nix", "flake", "template"]
 repository = "github.com/domirando/gtkchi"
-homepage = "github.com/domirando/gtkchi"
+homepage = "https://github.com/domirando/gtkchi"
 readme = "README.md"
 exclude = [
     "public/assets/*",
