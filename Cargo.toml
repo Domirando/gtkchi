@@ -7,7 +7,7 @@ description = "A basic template for GTK-RS, NIX"
 keywords = ["rust", "gtk", "nix", "flake", "template"]
 repository = "github.com/domirando/gtkchi"
 homepage = "github.com/domirando/gtkchi"
-readme = "https://github.com/Domirando/gtkchi/blob/master/README.md"
+readme = "README.md"
 
 [dependencies]
 gtk = { version = "0.10.0", package = "gtk4", features = ["v4_12"] }
