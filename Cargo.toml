@@ -13,8 +13,9 @@ exclude = [
     "videos/*",
 ]
 include = [
-    "**/*.rs",
+    "**/*.rs",                                                                                                  
 ]
 
 [dependencies]
-gtk = { version = "0.10.0", package = "gtk4", features = ["v4_12"] }
+relm4 = "0.9.1"
+relm4-components = "0.9.1"
