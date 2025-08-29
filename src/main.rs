@@ -1,8 +1,9 @@
 use gtk::prelude::*;
+use relm4::adw::prelude::*;
 use relm4::prelude::*;
-
 struct AppModel {
     counter: u8,
+    expander: adw::ExpanderRow
 }
 
 #[derive(Debug)]
@@ -26,6 +27,8 @@ impl SimpleComponent for AppModel {
                 set_orientation: gtk::Orientation::Vertical,
                 set_spacing: 5,
                 set_margin_all: 5,
+                set_vexpand: true,
+                set_hexpand: true,
 
                 gtk::Button {
                     set_label: "Increment",
@@ -41,7 +44,24 @@ impl SimpleComponent for AppModel {
                     #[watch]
                     set_label: &format!("Counter: {}", model.counter),
                     set_margin_all: 5,
+                },
+
+                gtk::Box{
+                    adw::PreferencesGroup {
+                        set_title: "Extensions",
+
+                        #[name(expander)]
+                        add = &adw::ExpanderRow {
+                            set_title: "AppIndicator and KStatusNotifierItem Support",
+                            set_subtitle: "appindicatorsupport@rgcjonas.gmail.com",
+                        }
+                    }
+
+
                 }
+
+
+
             }
         }
     }
@@ -52,11 +72,24 @@ impl SimpleComponent for AppModel {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let model = AppModel { counter };
-
+        let mut model = AppModel { 
+            counter,
+            expander: adw::ExpanderRow::new()
+        };
         // Insert the code generation of the view! macro here
         let widgets = view_output!();
-
+        model.expander = widgets.expander.clone();
+        let justify = gtk::Justification::Left;
+        let vbox = gtk::Box::new(gtk::Orientation::Vertical, 1);
+        vbox.set_align(gtk::Align::Start);
+        
+        for i in 1..5 {
+            // if i == 1{ 
+            // }
+            let label = &gtk::Label::builder().label("sadasdasd").justify(justify).build();
+            vbox.append(label);
+            model.expander.add_row(&vbox);         
+        }
         ComponentParts { model, widgets }
     }
 
