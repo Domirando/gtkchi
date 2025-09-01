@@ -2,3 +2,9 @@ label.title{
   font-size: 24px;
   font-weight: bold;
 }
+
+button.btn_version {
+    background-color: rgb(168, 168, 248);
+    color: rgb(11, 11, 88);
+    opacity: 40%; 
+}   

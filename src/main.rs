@@ -37,12 +37,11 @@ impl SimpleComponent for Dialog {
             set_child = &relm4::gtk::Box {
                 set_margin_all: 30,
                 set_spacing: 10,
-                
+
+                set_width_request: 300,
                 set_orientation: gtk::Orientation::Vertical,
                 gtk::Image {
-                    set_vexpand: true,
-                    set_hexpand: true,
-                    set_pixel_size: 200,
+                    set_pixel_size: 150,
                     set_paintable: Some(&embedded_logo()),
                 },
                 gtk::Label {
@@ -54,6 +53,12 @@ impl SimpleComponent for Dialog {
                     set_halign: gtk::Align::Center,
                     set_label: "The Gnome Project"
                 },
+                gtk::Button{
+                    add_css_class: "btn_version",
+                    set_label: "48.2",  
+                    set_hexpand: false,
+                    set_width_request: 50,        
+                }
             },
 
             connect_close_request[sender] => move |_| {
