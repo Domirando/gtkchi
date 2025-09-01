@@ -1,17 +1,14 @@
-// Don't show relm4::gtk 4.10 deprecations.
-// We can't replace them without raising the relm4::gtk requirement to 4.10.
 #![allow(deprecated)]
-
 use std::convert::identity;
-
 use relm4::gtk::glib;
+use relm4::adw::prelude::*;
+use relm4::prelude::*;
 use relm4::gtk::prelude::{ButtonExt, GtkWindowExt, WidgetExt};
 use relm4::MessageBroker;
 use relm4::{
     Component, ComponentController, ComponentParts, ComponentSender, Controller, RelmApp,
     SimpleComponent,
 };
-
 static DIALOG_BROKER: MessageBroker<DialogMsg> = MessageBroker::new();
 
 struct Dialog {
@@ -31,19 +28,32 @@ impl SimpleComponent for Dialog {
     type Output = ButtonMsg;
 
     view! {
-        dialog = relm4::gtk::Dialog {
+        dialog = gtk::Dialog {
             #[watch]
             set_visible: model.visible,
             set_modal: true,
 
             #[wrap(Some)]
-            set_child = &relm4::gtk::Label {
-                set_width_request: 200,
-                set_height_request: 200,
-                set_halign: relm4::gtk::Align::Center,
-                set_valign: relm4::gtk::Align::Center,
-                #[watch]
-                set_label: "Sozlamalar"
+            set_child = &relm4::gtk::Box {
+                set_margin_all: 30,
+                set_spacing: 10,
+                
+                set_orientation: gtk::Orientation::Vertical,
+                gtk::Image {
+                    set_vexpand: true,
+                    set_hexpand: true,
+                    set_pixel_size: 200,
+                    set_paintable: Some(&embedded_logo()),
+                },
+                gtk::Label {
+                    set_halign: gtk::Align::Center,
+                    add_css_class: "title",
+                    set_label: "Sozlamalar"
+                },
+                gtk::Label {
+                    set_halign: gtk::Align::Center,
+                    set_label: "The Gnome Project"
+                },
             },
 
             connect_close_request[sender] => move |_| {
@@ -76,6 +86,14 @@ struct Button {
     dialog: Controller<Dialog>,
 }
 
+fn embedded_logo() -> gtk::gdk::Texture {
+    let bytes = include_bytes!("../assets/settings.png");
+    let g_bytes = glib::Bytes::from(&bytes.to_vec());
+    let stream = gtk::gio::MemoryInputStream::from_bytes(&g_bytes);
+    let pixbuf = gtk::gdk_pixbuf::Pixbuf::from_stream(&stream, gtk::gio::Cancellable::NONE).unwrap();
+    gtk::gdk::Texture::for_pixbuf(&pixbuf)
+}
+
 #[derive(Debug)]
 enum ButtonMsg {}
 
@@ -86,8 +104,8 @@ impl SimpleComponent for Button {
     type Output = AppMsg;
 
     view! {
-        button = &relm4::gtk::Button {
-            set_label: "Show the dialog",
+        button = gtk::Button {
+            set_label: "Sozlamalaaaar",
             connect_clicked => move |_| {
                 DIALOG_BROKER.send(DialogMsg::Show);
             }
@@ -99,10 +117,6 @@ impl SimpleComponent for Button {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        // We don't have access to the parent window from here
-        // but we can just use the button to set the transient window for the dialog.
-        // Relm4 will get the window later by calling [`WidgetExt::root()`]
-        // on the button once all widgets are connected.
         let dialog = Dialog::builder()
             //.transient_for(&root)
             .launch_with_broker((), &DIALOG_BROKER)
@@ -130,7 +144,7 @@ impl SimpleComponent for App {
     type Output = ();
 
     view! {
-        main_window = relm4::gtk::ApplicationWindow {
+        main_window = gtk::ApplicationWindow {
             set_default_size: (500, 250),
             set_child: Some(model.button.widget()),
         }
@@ -153,6 +167,14 @@ impl SimpleComponent for App {
 }
 
 fn main() {
+    gtk::init().expect("noo");
+    let provider = gtk::CssProvider::new();
+    provider.load_from_path("./assets/style.css");
+    gtk::style_context_add_provider_for_display(
+        &gtk::gdk::Display::default().unwrap(),
+        &provider,
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+    );
     let app = RelmApp::new("relm4.example.transient_dialog");
     app.run::<App>(());
 }
