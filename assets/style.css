@@ -3,8 +3,41 @@ label.title{
   font-weight: bold;
 }
 
-button.btn_version {
-    background-color: rgb(168, 168, 248);
-    color: rgb(11, 11, 88);
-    opacity: 40%; 
-}   
+button.btn-version {
+  background-color: rgba(62, 223, 252, 0.603);
+  color: rgb(1, 83, 121);
+  border-radius: 20px;
+}
+ 
+.box {
+  background-color: #3d3d3d; 
+  border-radius: 10px;
+}
+
+.wrap{
+  border-radius: 20px;
+}
+
+.action {
+  color: red;
+  font-size: 12px;
+}
+
+.box-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3d3d3d; 
+  padding: 15px;
+  border-radius: 10px 10px 0px 0px;
+}
+.box-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3d3d3d; 
+  padding: 15px;
+  border-radius: 0px 0px 10px 10px;
+}

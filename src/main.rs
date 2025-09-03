@@ -29,18 +29,21 @@ impl SimpleComponent for Dialog {
 
     view! {
         dialog = gtk::Dialog {
+            add_css_class: "wrap",
             #[watch]
             set_visible: model.visible,
             set_modal: true,
 
             #[wrap(Some)]
             set_child = &relm4::gtk::Box {
-                set_margin_all: 30,
-                set_spacing: 10,
-
-                set_width_request: 300,
+                set_margin_all: 20,
+                set_spacing: 20,
+                set_width_request: 350,
                 set_orientation: gtk::Orientation::Vertical,
-                gtk::Image {
+                gtk::Box {
+                    set_spacing: 5,
+                    set_orientation: gtk::Orientation::Vertical,
+                    gtk::Image {
                     set_pixel_size: 150,
                     set_paintable: Some(&embedded_logo()),
                 },
@@ -54,12 +57,120 @@ impl SimpleComponent for Dialog {
                     set_label: "The Gnome Project"
                 },
                 gtk::Button{
-                    add_css_class: "btn_version",
+                    add_css_class: "btn-version",
                     set_label: "48.2",  
-                    set_hexpand: false,
-                    set_width_request: 50,        
+                    set_hexpand: false,  
+                    set_halign: gtk::Align::Center,   
+                },
+                },
+                
+                gtk::Box {
+                    add_css_class: "box",
+                    // set_hexpand: true,
+                    // set_width_request: 300,
+                    adw::ActionRow {
+                        add_css_class: "action",
+                      set_width_request: 350,
+                      set_title: "Website",  
+                      add_suffix = &gtk::LinkButton::builder()
+                        .uri("https://github.com")
+                        .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                        .build(),
+                    },
+                    // gtk::Label {
+                    //     set_justify: gtk::Justification::Left,
+                    //     add_css_class: "box-label",
+                    //     set_align: gtk::Align::Start,
+                    //     // set_halign: gtk::Align::Start,
+                    //     set_label: "Website"
+                    // },
+                    // gtk::Image {
+                    //     add_css_class: "icon",
+                    //     set_align: gtk::Align::End,
+                    //     // set_halign: gtk::Align::End,
+                    //     set_icon_name: Some("send-to-symbolic"),
+                    // },
+                },
+            
+                gtk::Box{
+                    set_spacing: 1,
+                    set_orientation: gtk::Orientation::Vertical,
+                    gtk::Box {
+                    add_css_class: "box-top",
+                    set_hexpand: true,
+                    set_width_request: 300,
+                    gtk::Label {
+                        set_justify: gtk::Justification::Left,
+                        add_css_class: "box-label",
+                        // set_halign: gtk::Align::Start,
+                        set_label: "Support Qestions"
+                    },
+                    gtk::Image {
+                        add_css_class: "icon",
+                        // set_halign: gtk::Align::End,
+                        set_icon_name: Some("send-to-symbolic"),
+                    },
+                },
+                gtk::Box {
+                        add_css_class: "box-bottom",
+                        set_hexpand: true,
+                        set_width_request: 300,
+                        gtk::Label {
+                            set_justify: gtk::Justification::Left,
+                            add_css_class: "box-label",
+                            // set_halign: gtk::Align::Start,
+                            set_label: "Report an Issue"
+                        },
+                        gtk::Image {
+                            add_css_class: "icon",
+                            // set_halign: gtk::Align::End,
+                            set_icon_name: Some("send-to-symbolic"),
+                        },
+                    },
+                
+                },
+            
+                gtk::Box{
+                    set_orientation: gtk::Orientation::Vertical,
+                    set_spacing: 1,
+                    gtk::Box {
+                    add_css_class: "box-top",
+                    set_hexpand: true,
+                    set_width_request: 300,
+                    gtk::Label {
+                        set_justify: gtk::Justification::Left,
+                        add_css_class: "box-label",
+                        // set_halign: gtk::Align::Start,
+                        set_label: "Credits"
+                    },
+                    gtk::Image {
+                        add_css_class: "icon",
+                        // set_halign: gtk::Align::End,
+                        set_icon_name: Some("send-to-symbolic"),
+                    },
+                },
+                gtk::Box {
+                        add_css_class: "box-bottom",
+                        set_hexpand: true,
+                        set_width_request: 300,
+                        gtk::Label {
+                            set_justify: gtk::Justification::Left,
+                            add_css_class: "box-label",
+                            // set_halign: gtk::Align::Start,
+                            set_label: "Legal"
+                        },
+                        gtk::Image {
+                            add_css_class: "icon",
+                            // set_halign: gtk::Align::End,
+                            set_icon_name: Some("send-to-symbolic"),
+                        },
+                    },
+                
                 }
+            
             },
+
+
 
             connect_close_request[sender] => move |_| {
                 sender.input(DialogMsg::Hide);
