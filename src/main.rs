@@ -66,30 +66,23 @@ impl SimpleComponent for Dialog {
                 
                 gtk::Box {
                     add_css_class: "box",
-                    // set_hexpand: true,
-                    // set_width_request: 300,
-                    adw::ActionRow {
-                        add_css_class: "action",
-                      set_width_request: 350,
-                      set_title: "Website",  
-                      add_suffix = &gtk::LinkButton::builder()
-                        .uri("https://github.com")
-                        .child(&gtk::Image::from_icon_name("send-to-symbolic"))
-                        .build(),
+                    set_hexpand: true,
+                    set_width_request: 300,
+                    gtk::Label {
+                        set_justify: gtk::Justification::Left,
+                        add_css_class: "box-label",
+                        set_align: gtk::Align::Start,
+                        set_hexpand: false,
+                        // set_halign: gtk::Align::Start,
+                        set_label: "Website"
                     },
-                    // gtk::Label {
-                    //     set_justify: gtk::Justification::Left,
-                    //     add_css_class: "box-label",
-                    //     set_align: gtk::Align::Start,
-                    //     // set_halign: gtk::Align::Start,
-                    //     set_label: "Website"
-                    // },
-                    // gtk::Image {
-                    //     add_css_class: "icon",
-                    //     set_align: gtk::Align::End,
-                    //     // set_halign: gtk::Align::End,
-                    //     set_icon_name: Some("send-to-symbolic"),
-                    // },
+                    gtk::Image {
+                        add_css_class: "icon",
+                        set_hexpand: false,
+                        set_align: gtk::Align::End,
+                        // set_halign: gtk::Align::End,
+                        set_icon_name: Some("send-to-symbolic"),
+                    },
                 },
             
                 gtk::Box{
