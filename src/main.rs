@@ -49,7 +49,7 @@ impl SimpleComponent for Dialog {
                 },
                 gtk::Label {
                     set_halign: gtk::Align::Center,
-                    add_css_class: "title",
+                    add_css_class: "tiitle",
                     set_label: "Sozlamalar"
                 },
                 gtk::Label {
@@ -64,103 +64,64 @@ impl SimpleComponent for Dialog {
                 },
                 },
                 
-                gtk::Box {
+                adw::ActionRow {
+                    set_width_request: 350,
+                    set_title: "Website",
                     add_css_class: "box",
-                    set_hexpand: true,
-                    set_width_request: 300,
-                    gtk::Label {
-                        set_justify: gtk::Justification::Left,
-                        add_css_class: "box-label",
-                        set_align: gtk::Align::Start,
-                        set_hexpand: false,
-                        // set_halign: gtk::Align::Start,
-                        set_label: "Website"
-                    },
-                    gtk::Image {
-                        add_css_class: "icon",
-                        set_hexpand: false,
-                        set_align: gtk::Align::End,
-                        // set_halign: gtk::Align::End,
-                        set_icon_name: Some("send-to-symbolic"),
-                    },
+                    add_suffix = &gtk::LinkButton::builder()
+                        .uri("https://clients.ahost.uz/login")
+                        .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                        .build(),
                 },
+               
             
                 gtk::Box{
                     set_spacing: 1,
                     set_orientation: gtk::Orientation::Vertical,
-                    gtk::Box {
-                    add_css_class: "box-top",
-                    set_hexpand: true,
-                    set_width_request: 300,
-                    gtk::Label {
-                        set_justify: gtk::Justification::Left,
-                        add_css_class: "box-label",
-                        // set_halign: gtk::Align::Start,
-                        set_label: "Support Qestions"
+                    adw::ActionRow {
+                        set_width_request: 350,
+                        set_title: "Support Questions",
+                        add_css_class: "box-top",
+                        add_suffix = &gtk::LinkButton::builder()
+                            .uri("https://clients.ahost.uz/login")
+                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .build(),
                     },
-                    gtk::Image {
-                        add_css_class: "icon",
-                        // set_halign: gtk::Align::End,
-                        set_icon_name: Some("send-to-symbolic"),
-                    },
-                },
-                gtk::Box {
+                    adw::ActionRow {
+                        set_width_request: 350,
+                        set_title: "Report an Issue",
                         add_css_class: "box-bottom",
-                        set_hexpand: true,
-                        set_width_request: 300,
-                        gtk::Label {
-                            set_justify: gtk::Justification::Left,
-                            add_css_class: "box-label",
-                            // set_halign: gtk::Align::Start,
-                            set_label: "Report an Issue"
-                        },
-                        gtk::Image {
-                            add_css_class: "icon",
-                            // set_halign: gtk::Align::End,
-                            set_icon_name: Some("send-to-symbolic"),
-                        },
+                        add_suffix = &gtk::LinkButton::builder()
+                            .uri("https://clients.ahost.uz/login")
+                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .build(),
                     },
                 
                 },
             
                 gtk::Box{
-                    set_orientation: gtk::Orientation::Vertical,
                     set_spacing: 1,
-                    gtk::Box {
-                    add_css_class: "box-top",
-                    set_hexpand: true,
-                    set_width_request: 300,
-                    gtk::Label {
-                        set_justify: gtk::Justification::Left,
-                        add_css_class: "box-label",
-                        // set_halign: gtk::Align::Start,
-                        set_label: "Credits"
+                    set_orientation: gtk::Orientation::Vertical,
+                    adw::ActionRow {
+                        set_width_request: 350,
+                        set_title: "Credits",
+                        add_css_class: "box-top",
+                        add_suffix = &gtk::LinkButton::builder()
+                            .uri("https://clients.ahost.uz/login")
+                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .build(),
                     },
-                    gtk::Image {
-                        add_css_class: "icon",
-                        // set_halign: gtk::Align::End,
-                        set_icon_name: Some("send-to-symbolic"),
-                    },
-                },
-                gtk::Box {
+                    adw::ActionRow {
+                        set_width_request: 350,
+                        set_title: "Legal",
                         add_css_class: "box-bottom",
-                        set_hexpand: true,
-                        set_width_request: 300,
-                        gtk::Label {
-                            set_justify: gtk::Justification::Left,
-                            add_css_class: "box-label",
-                            // set_halign: gtk::Align::Start,
-                            set_label: "Legal"
-                        },
-                        gtk::Image {
-                            add_css_class: "icon",
-                            // set_halign: gtk::Align::End,
-                            set_icon_name: Some("send-to-symbolic"),
-                        },
+                        add_suffix = &gtk::LinkButton::builder()
+                            .uri("https://clients.ahost.uz/login")
+                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .build(),
                     },
                 
-                }
-            
+                },
             },
 
 
