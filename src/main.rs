@@ -108,7 +108,7 @@ impl SimpleComponent for Dialog {
                         add_css_class: "box-top",
                         add_suffix = &gtk::LinkButton::builder()
                             .uri("https://clients.ahost.uz/login")
-                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .child(&gtk::Image::from_icon_name("go-next-symbolic"))
                             .build(),
                     },
                     adw::ActionRow {
@@ -117,7 +117,7 @@ impl SimpleComponent for Dialog {
                         add_css_class: "box-bottom",
                         add_suffix = &gtk::LinkButton::builder()
                             .uri("https://clients.ahost.uz/login")
-                            .child(&gtk::Image::from_icon_name("send-to-symbolic"))
+                            .child(&gtk::Image::from_icon_name("go-next-symbolic"))
                             .build(),
                     },
                 
