@@ -39,16 +39,6 @@ impl SimpleComponent for AppModel {
                         }
                     }
                 },
-               gtk::Button {
-                    set_label: "Sozlamalar",
-                    connect_clicked => AppMsg::Settings,
-               },
-
-                gtk::Label {
-                    #[watch]
-                    set_label: &format!("Bosildi: {}", model.clicked),
-                    set_margin_all: 5,
-                },
             }
         }
     }

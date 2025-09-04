@@ -74,7 +74,6 @@ impl SimpleComponent for Dialog {
                         .build(),
                 },
                
-            
                 gtk::Box{
                     set_spacing: 1,
                     set_orientation: gtk::Orientation::Vertical,
@@ -175,7 +174,7 @@ impl SimpleComponent for Button {
 
     view! {
         button = gtk::Button {
-            set_label: "Sozlamalaaaar",
+            set_label: "Sozlamalar",
             connect_clicked => move |_| {
                 DIALOG_BROKER.send(DialogMsg::Show);
             }
@@ -188,7 +187,6 @@ impl SimpleComponent for Button {
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let dialog = Dialog::builder()
-            //.transient_for(&root)
             .launch_with_broker((), &DIALOG_BROKER)
             .forward(sender.input_sender(), identity);
 
@@ -215,8 +213,25 @@ impl SimpleComponent for App {
 
     view! {
         main_window = gtk::ApplicationWindow {
-            set_default_size: (500, 250),
-            set_child: Some(model.button.widget()),
+            set_default_size: (350, 350),
+            gtk::Box {
+                set_spacing: 15,
+                set_margin_all: 15,
+                set_orientation: gtk::Orientation::Vertical,
+                gtk::Box{
+                    adw::PreferencesGroup {
+                        #[name(expander)]
+                        add = &adw::ExpanderRow {
+                            set_title: "AppIndicator and KStatusNotifierItem Support",
+                            set_subtitle: "appindicatorsupport@rgcjonas.gmail.com",
+                        }
+                    }
+                },
+                append = model.button.widget(),
+            },
+
+            // #[wrap(Some)]
+            
         }
     }
 
