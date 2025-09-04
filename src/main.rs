@@ -139,7 +139,7 @@ impl SimpleComponent for Dialog {
                     gtk::Image {
                         add_css_class: "icon",
                         // set_halign: gtk::Align::End,
-                        set_icon_name: Some("send-to-symbolic"),
+                        set_icon_name: Some("go-next-symbolic"),
                     },
                 },
                 gtk::Box {
@@ -155,7 +155,7 @@ impl SimpleComponent for Dialog {
                         gtk::Image {
                             add_css_class: "icon",
                             // set_halign: gtk::Align::End,
-                            set_icon_name: Some("send-to-symbolic"),
+                            set_icon_name: Some("go-next-symbolic"),
                         },
                     },
                 
